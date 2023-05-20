@@ -5,6 +5,10 @@ namespace Autenticacion.Data
 {
     public class SchoolContext : DbContext
     {
+        public SchoolContext()
+        {
+        }
+
         public SchoolContext(DbContextOptions options) : base(options)
         {
         }
