@@ -1,3 +1,6 @@
+using Autenticacion.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Autenticacion
 {
     public class Program
@@ -9,15 +12,14 @@ namespace Autenticacion
             // Add services to the container.
             builder.Services.AddRazorPages();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            builder.Services.AddAuthentication().AddCookie("MyCookieAuth", options =>
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                options.Cookie.Name = "MyCookieAuth";
+                options.LoginPath = "/Account/Login";
+            });
+              
+
+            var app = builder.Build();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
